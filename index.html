@@ -6,6 +6,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&display=swap">
   <link rel="stylesheet" href="./style.css">
   <style>
+    /* Page background */
+    body {
+      background: url("bg.jpeg") center/cover fixed no-repeat;
+    }
+
     .music-btn {
       position: fixed;
       right: 16px;
@@ -22,57 +27,73 @@
       user-select: none;
     }
     .music-btn[aria-pressed="true"] { font-weight: 700; }
+
+    /* Heart image inside the first paper */
+    .paper.heart .heart-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      pointer-events: none; /* keep dragging smooth on the parent */
+      user-select: none;
+    }
   </style>
 </head>
 <body>
   <!-- Music -->
-  <!-- Recommended: copy your MP3 into /audio/birthdaymusic.mp3 for reliable loading -->
   <audio id="bg-music" preload="auto" loop playsinline>
-    <source src="audio/birthdaymusic.mp3" type="audio/mpeg" />
-    <!-- Fallback: your local Windows file path (may be blocked by browsers when served over http) -->
+    <!-- Primary relative path you gave -->
+    <source src="birthdaymusic.mp3" type="audio/mpeg" />
+    <!-- Optional fallback to your Windows path (may be blocked by browsers) -->
     <source src="file:///C:/Users/SAI%20PRUDHVI/Downloads/impressingCrush-main/impressingCrush-main/birthdaymusic.mp3" type="audio/mpeg" />
   </audio>
   <button id="music-toggle" class="music-btn" aria-pressed="false" title="Toggle music">▶️ Play music</button>
 
   <!-- A pen by Developer Sai Prudhvi -->
-  <div class="paper heart"></div>
+  <div class="paper heart">
+    <img class="heart-img" src="heart.webp" alt="Heart" loading="lazy" />
+  </div>
 
-  <!-- 7 photos -->
+  <!-- 8 photos (updated to your filenames) -->
   <div class="paper image">
     <p>and I fallen in</p>
     <p>Love with You 😍</p>
-    <img src="images/1.jpg" alt="Photo 1" />
+    <img src="1.jpg" alt="Photo 1" loading="lazy" />
   </div>
 
   <div class="paper image">
     <p></p>
-    <img src="images/2.jpg" alt="Photo 2" />
+    <img src="2.jpg" alt="Photo 2" loading="lazy" />
   </div>
 
   <div class="paper image">
     <p>How can be</p>
     <p>someone so cute ❤️</p>
-    <img src="images/3.jpg" alt="Photo 3" />
+    <img src="3.jpg" alt="Photo 3" loading="lazy" />
   </div>
 
   <div class="paper image">
     <p></p>
-    <img src="images/4.jpg" alt="Photo 4" />
+    <img src="4.jpg" alt="Photo 4" loading="lazy" />
   </div>
 
   <div class="paper image">
     <p></p>
-    <img src="images/5.jpg" alt="Photo 5" />
+    <img src="5.jpg" alt="Photo 5" loading="lazy" />
   </div>
 
   <div class="paper image">
     <p></p>
-    <img src="images/6.jpg" alt="Photo 6" />
+    <img src="6.jpg" alt="Photo 6" loading="lazy" />
   </div>
 
   <div class="paper image">
     <p></p>
-    <img src="images/7.jpg" alt="Photo 7" />
+    <img src="7.jpg" alt="Photo 7" loading="lazy" />
+  </div>
+
+  <div class="paper image">
+    <p></p>
+    <img src="8.jpg" alt="Photo 8" loading="lazy" />
   </div>
 
   <div class="paper red">
@@ -116,7 +137,6 @@
           btn.setAttribute('aria-pressed', 'true');
         }
       } catch (e) {
-        // Autoplay blocked until user clicks; button remains available
         console.warn('Autoplay blocked by browser. Click the button to play.');
       }
     }
