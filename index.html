@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Drag Papers ❤️</title>
+  <title>HAPPY BDAY MM ❤️</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&display=swap">
   <link rel="stylesheet" href="./style.css">
   <style>
     body {
       background: url("bg.jpeg") center/cover fixed no-repeat;
       margin: 0;
-      overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
     }
-
     .music-btn {
       position: fixed;
       right: 16px;
@@ -29,39 +27,20 @@
       user-select: none;
     }
     .music-btn[aria-pressed="true"] { font-weight: 700; }
-
-    /* Make images bigger + friendlier to drag on mobile */
-    .paper.image { padding: 10px; }
-    .paper.image img {
-      display: block;
-      width: min(92vw, 560px); /* bigger images, responsive */
-      height: auto;
-      border-radius: 12px;
-      -webkit-user-drag: none;
-      user-select: none;
-      pointer-events: none; /* so dragging works when touching the photo */
-    }
-
-    /* General drag smoothness */
     .paper { touch-action: none; }
     .paper.heart .heart-img {
-      width: min(92vw, 520px);
+      width: 100%;
       height: auto;
       display: block;
       pointer-events: none;
       user-select: none;
       -webkit-user-drag: none;
     }
-
-    /* Simple text styling override in case style.css is minimal */
-    .paper p { margin: 6px 0; font-size: 1.05rem; }
-    .headline { font-size: clamp(24px, 6vw, 42px); font-weight: 700; }
-    .subtle  { opacity: 0.9; }
   </style>
 </head>
 <body>
   <!-- Music -->
-  <audio id="bg-music" preload="auto" loop playsinline>
+  <audio id="bg-music" preload="auto" loop autoplay playsinline>
     <source src="birthdaymusic.mp3" type="audio/mpeg" />
   </audio>
   <button id="music-toggle" class="music-btn" aria-pressed="false" title="Toggle music">▶️ Play music</button>
@@ -71,46 +50,72 @@
     <img class="heart-img" src="heart.webp" alt="Heart" loading="lazy" />
   </div>
 
-  <!-- Photos (1–8.jpg) -->
-  <div class="paper image"><img src="1.jpg" alt="Photo 1" loading="lazy" /></div>
-  <div class="paper image"><img src="2.jpg" alt="Photo 2" loading="lazy" /></div>
-  <div class="paper image"><img src="3.jpg" alt="Photo 3" loading="lazy" /></div>
-  <div class="paper image"><img src="4.jpg" alt="Photo 4" loading="lazy" /></div>
-  <div class="paper image"><img src="5.jpg" alt="Photo 5" loading="lazy" /></div>
-  <div class="paper image"><img src="6.jpg" alt="Photo 6" loading="lazy" /></div>
-  <div class="paper image"><img src="7.jpg" alt="Photo 7" loading="lazy" /></div>
-  <div class="paper image"><img src="8.jpg" alt="Photo 8" loading="lazy" /></div>
+  <!-- Images with new text -->
+  <div class="paper image">
+    <p>Happy Birthday 🎉</p>
+    <p>mmrobo — my partner in chaos 😜</p>
+    <img src="1.jpg" alt="Photo 1" />
+  </div>
 
-  <!-- New text papers -->
-  <div class="paper">
-    <p class="headline">Happy Birthday mmrobo 🎉</p>
-    <p class="subtle">Wishing you laughs, good vibes, and cake you don’t have to share. 😉</p>
+  <div class="paper image">
+    <p>Best friends are like stars ✨</p>
+    <p>...you can’t always see them, but you know they’re always there!</p>
+    <img src="2.jpg" alt="Photo 2" />
+  </div>
+
+  <div class="paper image">
+    <p>Another year older?</p>
+    <p>Nah… just another level unlocked! 🕹️</p>
+    <img src="3.jpg" alt="Photo 3" />
+  </div>
+
+  <div class="paper image">
+    <p>You’re the Wi-Fi to my router 📶</p>
+    <p>…life’s boring without you!</p>
+    <img src="4.jpg" alt="Photo 4" />
+  </div>
+
+  <div class="paper image">
+    <p>“Age is merely the number of years</p>
+    <p>the world has been enjoying you.” 😎</p>
+    <img src="5.jpg" alt="Photo 5" />
+  </div>
+
+  <div class="paper image">
+    <p>Thanks for being my</p>
+    <p>emergency contact for dumb ideas 😂</p>
+    <img src="6.jpg" alt="Photo 6" />
+  </div>
+
+  <div class="paper image">
+    <p>You’re basically my therapist</p>
+    <p>…but paid in food 🍕</p>
+    <img src="7.jpg" alt="Photo 7" />
+  </div>
+
+  <div class="paper image">
+    <p>May your birthday be</p>
+    <p>as awesome as your selfie game 📸</p>
+    <img src="8.jpg" alt="Photo 8" />
+  </div>
+
+  <!-- Extra fun text papers -->
+  <div class="paper red">
+    <p class="p1">Here’s to more adventures,</p>
+    <p class="p2">more laughs, and less adulting 🥳</p>
   </div>
 
   <div class="paper">
-    <p class="headline">my chaos coordinator 😜</p>
-    <p class="subtle">Keeping the mayhem fun since day one.</p>
-  </div>
-
-  <!-- Simple & funny friendship quotes -->
-  <div class="paper">
-    <p>“We’ll be friends until we’re old and senile… then we’ll be <em>new</em> friends.” 😂</p>
+    <p class="p1">You’re not old…</p>
+    <p class="p1">You’re just vintage 😏</p>
   </div>
 
   <div class="paper">
-    <p>“You’re the Wi-Fi to my router — always there when I need bars.” 📶</p>
-  </div>
-
-  <div class="paper">
-    <p>“Best friends: the human version of a double-tap.” ❤️</p>
-  </div>
-
-  <div class="paper">
-    <p>Drag the papers to move!</p>
+    <p class="p1">Drag the papers to move!</p>
   </div>
 
   <script>
-    // ===== Music: play on first user action + toggle button =====
+    // Music + fade-in autoplay where possible
     const audio = document.getElementById('bg-music');
     const btn = document.getElementById('music-toggle');
 
@@ -130,7 +135,7 @@
       try {
         if (audio.paused) {
           await audio.play();
-          fadeIn(audio, 0.6);
+          fadeIn(audio, 0.5);
           btn.textContent = '⏸️ Pause music';
           btn.setAttribute('aria-pressed', 'true');
         }
@@ -146,7 +151,6 @@
       window.removeEventListener('keydown', userStart);
     };
 
-    // Trigger play when user first interacts (tap/drag/press)
     window.addEventListener('pointerdown', userStart, { once: true });
     window.addEventListener('touchstart', userStart, { once: true });
     window.addEventListener('keydown', userStart, { once: true });
@@ -161,7 +165,7 @@
       }
     });
 
-    // ===== Mobile-friendly drag for papers =====
+    // Drag support for mobile + desktop
     let active = null, offsetX = 0, offsetY = 0;
 
     function startDrag(e) {
@@ -170,14 +174,11 @@
       const rect = active.getBoundingClientRect();
       offsetX = touch.clientX - rect.left;
       offsetY = touch.clientY - rect.top;
-
-      // Make sure the element is positioned
       if (getComputedStyle(active).position !== 'absolute') {
         active.style.position = 'absolute';
         active.style.left = rect.left + window.scrollX + 'px';
         active.style.top  = rect.top  + window.scrollY + 'px';
       }
-
       document.addEventListener('mousemove', drag);
       document.addEventListener('touchmove', drag, { passive: false });
       document.addEventListener('mouseup', endDrag);
@@ -192,7 +193,7 @@
       const y = touch.clientY - offsetY + window.scrollY;
       active.style.left = x + 'px';
       active.style.top  = y + 'px';
-      active.style.zIndex = Date.now(); // bring to front
+      active.style.zIndex = Date.now();
     }
 
     function endDrag() {
@@ -203,7 +204,6 @@
       active = null;
     }
 
-    // Enable drag on all papers
     document.querySelectorAll('.paper').forEach(p => {
       p.style.touchAction = 'none';
       p.addEventListener('mousedown', startDrag);
