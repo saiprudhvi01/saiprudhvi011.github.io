@@ -6,11 +6,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&display=swap">
   <link rel="stylesheet" href="./style.css">
   <style>
-    /* Page background */
     body {
       background: url("bg.jpeg") center/cover fixed no-repeat;
+      margin: 0;
+      overflow-x: hidden;
     }
-
     .music-btn {
       position: fixed;
       right: 16px;
@@ -27,13 +27,11 @@
       user-select: none;
     }
     .music-btn[aria-pressed="true"] { font-weight: 700; }
-
-    /* Heart image inside the first paper */
     .paper.heart .heart-img {
       width: 100%;
       height: auto;
       display: block;
-      pointer-events: none; /* keep dragging smooth on the parent */
+      pointer-events: none;
       user-select: none;
     }
   </style>
@@ -41,78 +39,31 @@
 <body>
   <!-- Music -->
   <audio id="bg-music" preload="auto" loop playsinline>
-    <!-- Primary relative path you gave -->
     <source src="birthdaymusic.mp3" type="audio/mpeg" />
-    <!-- Optional fallback to your Windows path (may be blocked by browsers) -->
-    <source src="file:///C:/Users/SAI%20PRUDHVI/Downloads/impressingCrush-main/impressingCrush-main/birthdaymusic.mp3" type="audio/mpeg" />
   </audio>
   <button id="music-toggle" class="music-btn" aria-pressed="false" title="Toggle music">▶️ Play music</button>
 
-  <!-- A pen by Developer Sai Prudhvi -->
+  <!-- Heart -->
   <div class="paper heart">
     <img class="heart-img" src="heart.webp" alt="Heart" loading="lazy" />
   </div>
 
-  <!-- 8 photos (updated to your filenames) -->
-  <div class="paper image">
-    <p>and I fallen in</p>
-    <p>Love with You 😍</p>
-    <img src="1.jpg" alt="Photo 1" loading="lazy" />
-  </div>
+  <!-- Photos -->
+  <div class="paper image"><p>and I fallen in</p><p>Love with You 😍</p><img src="1.jpg" alt="Photo 1" /></div>
+  <div class="paper image"><img src="2.jpg" alt="Photo 2" /></div>
+  <div class="paper image"><p>How can be</p><p>someone so cute ❤️</p><img src="3.jpg" alt="Photo 3" /></div>
+  <div class="paper image"><img src="4.jpg" alt="Photo 4" /></div>
+  <div class="paper image"><img src="5.jpg" alt="Photo 5" /></div>
+  <div class="paper image"><img src="6.jpg" alt="Photo 6" /></div>
+  <div class="paper image"><img src="7.jpg" alt="Photo 7" /></div>
+  <div class="paper image"><img src="8.jpg" alt="Photo 8" /></div>
 
-  <div class="paper image">
-    <p></p>
-    <img src="2.jpg" alt="Photo 2" loading="lazy" />
-  </div>
+  <div class="paper red"><p class="p1">and My Favorite</p><p class="p2">Person 😍</p></div>
+  <div class="paper"><p class="p1">You are Cute</p><p class="p1">Amazing ❤️</p></div>
+  <div class="paper"><p class="p1">Drag the papers to move!</p></div>
 
-  <div class="paper image">
-    <p>How can be</p>
-    <p>someone so cute ❤️</p>
-    <img src="3.jpg" alt="Photo 3" loading="lazy" />
-  </div>
-
-  <div class="paper image">
-    <p></p>
-    <img src="4.jpg" alt="Photo 4" loading="lazy" />
-  </div>
-
-  <div class="paper image">
-    <p></p>
-    <img src="5.jpg" alt="Photo 5" loading="lazy" />
-  </div>
-
-  <div class="paper image">
-    <p></p>
-    <img src="6.jpg" alt="Photo 6" loading="lazy" />
-  </div>
-
-  <div class="paper image">
-    <p></p>
-    <img src="7.jpg" alt="Photo 7" loading="lazy" />
-  </div>
-
-  <div class="paper image">
-    <p></p>
-    <img src="8.jpg" alt="Photo 8" loading="lazy" />
-  </div>
-
-  <div class="paper red">
-    <p class="p1">and My Favorite</p>
-    <p class="p2">Person 😍</p>
-  </div>
-
-  <div class="paper">
-    <p class="p1">You are Cute</p>
-    <p class="p1">Amazing <span style="color: red !important;">❤️</span></p>
-  </div>
-
-  <div class="paper">
-    <p class="p1">Drag the papers to move!</p>
-  </div>
-
-  <script src="./script.js"></script>
   <script>
-    // Music: play on first user action + toggle button
+    // Music autoplay trigger
     const audio = document.getElementById('bg-music');
     const btn = document.getElementById('music-toggle');
 
@@ -137,23 +88,21 @@
           btn.setAttribute('aria-pressed', 'true');
         }
       } catch (e) {
-        console.warn('Autoplay blocked by browser. Click the button to play.');
+        console.warn('Autoplay blocked until user interacts.');
       }
     }
 
-    const startOnGesture = () => {
+    const userStart = () => {
       tryPlay();
-      window.removeEventListener('pointerdown', startOnGesture);
-      window.removeEventListener('touchstart', startOnGesture);
-      window.removeEventListener('keydown', startOnGesture);
+      window.removeEventListener('pointerdown', userStart);
+      window.removeEventListener('touchstart', userStart);
+      window.removeEventListener('keydown', userStart);
     };
-    window.addEventListener('pointerdown', startOnGesture, { once: true });
-    window.addEventListener('touchstart', startOnGesture, { once: true });
-    window.addEventListener('keydown', startOnGesture, { once: true });
 
-    document.querySelectorAll('.paper').forEach(p => {
-      p.addEventListener('pointerdown', startOnGesture, { once: true });
-    });
+    // Trigger play when dragging starts
+    window.addEventListener('pointerdown', userStart, { once: true });
+    window.addEventListener('touchstart', userStart, { once: true });
+    window.addEventListener('keydown', userStart, { once: true });
 
     btn.addEventListener('click', async () => {
       if (audio.paused) {
@@ -164,6 +113,45 @@
         btn.setAttribute('aria-pressed', 'false');
       }
     });
+
+    // Simple mobile-friendly drag for papers
+    let active = null, offsetX = 0, offsetY = 0;
+
+    function startDrag(e) {
+      active = e.currentTarget;
+      const touch = e.touches ? e.touches[0] : e;
+      offsetX = touch.clientX - active.offsetLeft;
+      offsetY = touch.clientY - active.offsetTop;
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('touchmove', drag, { passive: false });
+      document.addEventListener('mouseup', endDrag);
+      document.addEventListener('touchend', endDrag);
+    }
+
+    function drag(e) {
+      if (!active) return;
+      e.preventDefault();
+      const touch = e.touches ? e.touches[0] : e;
+      active.style.position = 'absolute';
+      active.style.left = (touch.clientX - offsetX) + 'px';
+      active.style.top = (touch.clientY - offsetY) + 'px';
+      active.style.zIndex = Date.now(); // bring to front
+    }
+
+    function endDrag() {
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('touchmove', drag);
+      document.removeEventListener('mouseup', endDrag);
+      document.removeEventListener('touchend', endDrag);
+      active = null;
+    }
+
+    document.querySelectorAll('.paper').forEach(p => {
+      p.style.touchAction = 'none';
+      p.addEventListener('mousedown', startDrag);
+      p.addEventListener('touchstart', startDrag);
+    });
   </script>
 </body>
 </html>
+
